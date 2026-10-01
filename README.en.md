@@ -40,13 +40,17 @@ Running the launcher normally afterward installs the model dependencies.
 ## Import articles
 
 - Paste text directly into the interface.
-- Drop multiple TXT, Markdown, or DOCX files; filenames become article titles.
+- Drop multiple TXT, Markdown, DOCX, or PDF files; filenames become article titles.
 - Upload a ZIP containing those formats. Subfolders are supported, nested ZIP files are not.
 - Upload CSV with one article per row. `text` is required; `title` and `author` are optional. Chinese column aliases are supported. See [articles.csv](examples/articles.csv). Quote text containing commas or newlines. Excel's **CSV UTF-8** export is suitable.
 
-UTF-8 is recommended; UTF-16 with a byte-order mark and GB18030 are also supported. DOCX import reads body and table text without formatting. Images, scanned PDFs, and legacy DOC files are not supported.
+UTF-8 is recommended; UTF-16 with a byte-order mark and GB18030 are also supported. DOCX import reads body and table text without formatting. Images and legacy DOC files are not supported.
+
+**PDF:** selectable text is extracted in page order, with each file becoming one article. Upload PDFs directly or inside ZIP files. Run OCR first for scanned documents, and unlock password-protected PDFs before importing. Pages without extractable text are reported by page number; files with no text are rejected. Columns, tables, headers, and footers can affect reading order. Use the imported-text preview to check the first 12,000 characters before analysis; the complete imported text is used for computation. Headers are not automatically removed and text is not rewritten.
 
 Limits: 20 MB per file, 100 MB per import, up to 1,000 articles, and 50 MB of uncompressed ZIP content. Import limits are not a promise that all tokens fit in memory. Start with a low per-article token limit before increasing the workload.
+
+Each PDF is limited to 500 pages and 2,000,000 extracted characters. PDFs with oversized decompressed content are rejected with instructions to split them first.
 
 ## Two representations
 

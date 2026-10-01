@@ -30,6 +30,7 @@ st.markdown("""<style>
   .intro {color:#6a786e;font-size:1.04rem;max-width:800px;line-height:1.8}
   .note {padding:14px 18px;background:#edf2e9;border-radius:10px;font-size:.9rem;color:#49614d}
   [data-testid="stPlotlyChart"] {border:1px solid #e0e7dc;border-radius:12px;overflow:hidden}
+  [data-testid="stTextArea"] textarea:disabled {color:#20372f;-webkit-text-fill-color:#20372f;opacity:1}
 </style>""", unsafe_allow_html=True)
 
 
@@ -101,8 +102,9 @@ if source == "体验真实模型示例":
         st.info("预计算示例尚未生成。请切换到「分析我的文章」，导入文章并选择模型。")
 else:
     with st.expander("① 导入文章", expanded=True):
-        uploaded = st.file_uploader("拖入多篇文章或一个 ZIP", type=["txt", "md", "docx", "csv", "zip"], accept_multiple_files=True)
+        uploaded = st.file_uploader("拖入多篇文章或一个 ZIP", type=["txt", "md", "docx", "pdf", "csv", "zip"], accept_multiple_files=True)
         st.caption("CSV 使用 title、text 两列；保留原文标点和换行。支持中文 UTF-8 / GB18030 文本。")
+        st.caption("PDF 按页提取文字，每个文件作为一篇文章；支持可选中文字的 PDF。扫描件请先做 OCR，带密码的文件请先解锁。")
         with st.form("paste_article", clear_on_submit=True):
             col_a, col_b = st.columns([1, 3])
             with col_a:
@@ -132,6 +134,14 @@ else:
             st.warning(err)
         if articles:
             st.dataframe(pd.DataFrame({"标题": [a.title for a in articles], "字符数": [len(a.text) for a in articles]}), hide_index=True, width="stretch")
+            with st.expander("检查导入的正文"):
+                preview_article = st.selectbox("选择要检查的文章", articles,
+                                               format_func=lambda a: f"{a.title} · {a.id[-6:]}")
+                st.text_area("正文预览（只读）", value=preview_article.text[:12000], height=220,
+                             disabled=True, key=f"preview_{preview_article.id}")
+                if len(preview_article.text) > 12000:
+                    st.caption("预览仅显示前 12,000 个字符，后续分析使用完整导入正文。")
+                st.caption("PDF 的分栏、页眉页脚可能影响文字顺序；请先检查正文，再生成地图。")
         st.download_button("下载 CSV 导入模板", 'title,text\n示例文章,"在这里粘贴完整正文。"\n'.encode("utf-8-sig"), file_name="articles-template.csv", mime="text/csv")
 
     with st.expander("② 选择模型与计算范围", expanded=True):
