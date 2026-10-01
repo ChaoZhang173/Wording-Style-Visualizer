@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bert_tiny",
+    "label": "BERT Tiny · 英文双向编码器",
+    "model_id": "prajjwal1/bert-tiny",
+    "files": {
+      "input": "bert_tiny_input",
+      "contextual": "bert_tiny_contextual"
+    }
+  },
+  {
+    "id": "tiny_stories",
+    "label": "TinyStories · 英文因果语言模型",
+    "model_id": "roneneldan/TinyStories-1M",
+    "files": {
+      "input": "tiny_stories_input",
+      "contextual": "tiny_stories_contextual"
+    }
+  }
+]

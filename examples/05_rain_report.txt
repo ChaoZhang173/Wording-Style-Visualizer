@@ -1,0 +1,5 @@
+Rainfall affects the operation of urban transport in several ways. Water on road surfaces can reduce traction, while standing water may obstruct pedestrian routes. The effects depend on rainfall intensity, drainage capacity, and the condition of the surface.
+
+An observation record should distinguish the time of rainfall from the time at which an obstruction is reported. It should also include the location, the approximate duration, and any action taken. Consistent records make repeated problems easier to identify.
+
+Following an event, maintenance teams can inspect drains and remove debris where needed. A comparison of observations across several events can support decisions about further investigation. A single report, however, does not establish the cause of a recurring drainage problem.

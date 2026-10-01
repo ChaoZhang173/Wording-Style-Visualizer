@@ -1,0 +1,5 @@
+# Needed to analyze your own articles with open-weight models.
+torch>=2.6,<3
+transformers>=4.51,<5
+safetensors>=0.5,<1
+sentencepiece>=0.2,<0.3

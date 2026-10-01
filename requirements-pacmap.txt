@@ -1,0 +1,3 @@
+# Optional additional projection algorithm.
+# 0.9 uses prebuilt faiss-cpu by default instead of requiring an Annoy build.
+pacmap>=0.9.1,<1
