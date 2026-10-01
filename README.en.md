@@ -11,7 +11,7 @@ Explore how articles appear inside different language models. Each point represe
 1. Install **Python 3.12** from [python.org](https://www.python.org/downloads/). Python 3.10 and 3.11 also work. On Windows, select **Add python.exe to PATH** during installation.
 2. [Download the project ZIP](https://github.com/ChaoZhang173/Wording-Style-Visualizer/archive/HEAD.zip) and extract the complete folder.
 3. Double-click `start.command` on macOS or `start.bat` on Windows. On Linux, run `bash start.sh` inside the project folder.
-4. Wait for setup. The app opens in your browser at <http://localhost:8501>.
+4. Wait for setup. The app opens in your browser. If it does not, use the address printed by the launcher (usually <http://127.0.0.1:8501>).
 5. Try the bundled example, then import your articles, choose a model and representation, and generate a map.
 
 The launcher creates `.venv` inside the project and installs both interface and model dependencies. **Initial setup needs internet and can take several minutes.** Model weights are downloaded on first use and cached for later runs. Ordinary use requires no code changes or commercial embedding API key.
@@ -19,6 +19,8 @@ The launcher creates `.venv` inside the project and installs both interface and 
 An existing compatible `.venv` takes priority, so the launcher also works when the system's default Python is older.
 
 Keep the launcher window open. Press `Ctrl+C` there to stop the app; closing its browser tab does not stop the server. If macOS prevents opening the downloaded launcher directly, open a terminal in the project folder and run `bash start.sh`.
+
+Launching again reopens an existing Token Atlas instance. If another application occupies the port, the launcher chooses an available port and prints its address.
 
 Run Windows commands from the extracted project folder; keep the `.\` prefix when using PowerShell. Quote paths containing spaces, for example `cd "C:\Users\YourName\Downloads\Wording-Style-Visualizer"`. For model inference on macOS, use native Apple Silicon Python. Intel Macs and x86 Python under Rosetta should use the `--light` demo: the required PyTorch versions no longer provide official Intel Mac packages ([PyTorch announcement](https://dev-discuss.pytorch.org/t/pytorch-macos-x86-builds-deprecation-starting-january-2024/1690)).
 
@@ -99,7 +101,7 @@ Exports include token text. Run metadata may include titles of all articles used
 - **Setup or a model download stalls:** check access to Python package indexes and the model host. Rerun to reuse completed downloads. Use `--light` to explore the interface first.
 - **Out of memory:** choose a smaller model, shorten windows, or reduce articles and per-article token limits.
 - **Overlapping points:** repeated input embeddings are identical. The app does not add random jitter that would invent differences.
-- **Port in use:** stop the earlier instance or use `bash start.sh --port 8502` / `.\start.bat --port 8502`.
+- **Port in use:** the launcher reopens an existing Token Atlas instance or chooses another port if an unrelated service is running. Use its printed address. You can also set a preferred port with `bash start.sh --port 8502` / `.\start.bat --port 8502`. An older launcher's `Port 8501 is not available` error usually means a server is already running; it is unrelated to your internet connection.
 - **Chinese text appears as boxes in PNG/SVG:** macOS usually provides PingFang and Windows provides Microsoft YaHei. On Linux, install Noto Sans CJK and restart; for example, use `sudo apt install fonts-noto-cjk` on Ubuntu/Debian. The app does not download fonts. Interactive HTML uses fonts available to the browser.
 - **Broken environment:** stop the app, rename the project's `.venv` folder, and rerun the launcher. This does not alter source articles.
 

@@ -13,3 +13,4 @@ gatherUsageStats = false
 address = "127.0.0.1"
 maxUploadSize = 20
 showEmailPrompt = false
+enableStaticServing = true

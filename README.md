@@ -11,7 +11,7 @@
 1. 安装 **Python 3.12**（也支持 3.10、3.11）。从 [Python 官网](https://www.python.org/downloads/) 下载；Windows 安装时勾选 **Add python.exe to PATH**。
 2. [下载完整项目 ZIP](https://github.com/ChaoZhang173/Wording-Style-Visualizer/archive/HEAD.zip)，解压整个项目文件夹。
 3. macOS 双击 `start.command`；Windows 双击 `start.bat`；Linux 在项目文件夹运行 `bash start.sh`。
-4. 等待首次安装完成，浏览器会打开本地工具。若未自动打开，访问 <http://localhost:8501>。
+4. 等待首次安装完成，浏览器会打开本地工具。若未自动打开，访问启动窗口显示的地址（通常是 <http://127.0.0.1:8501>）。
 5. 先打开内置示例熟悉交互，再导入自己的文章、选择模型和表示模式、生成地图。
 
 启动器会在项目内创建 `.venv`，并安装界面、算法和模型运行组件。**首次安装需要联网，模型运行组件较大，可能需要几分钟。** 首次选择一个模型时，还需要下载它的权重；随后可复用本地缓存。普通使用无需编辑代码或提供商业 embedding API Key。
@@ -19,6 +19,8 @@
 如果项目已有可用的 `.venv`，启动器会优先使用它，即使系统默认 Python 版本较旧也可以启动。
 
 保留启动窗口。使用结束后在该窗口按 `Ctrl+C`；关闭浏览器页面不会自动关闭程序。
+
+重复双击启动器会识别并打开已经运行的文迹。若端口被其他程序占用，会自动选择空闲端口，并显示实际地址。
 
 macOS 如果拒绝直接打开下载的启动文件，可以在终端进入项目文件夹运行 `bash start.sh`。若提示找不到 Python，请先完成第 1 步，并重新打开启动窗口。
 
@@ -132,7 +134,7 @@ bash start.sh --pacmap       # macOS / Linux
 
 **有些点重合、看不见。** 输入 embedding 里相同 token 本就相同；不会为了美观添加随机抖动来制造差异。
 
-**启动端口被占用。** 关闭上次启动的程序，或运行 `bash start.sh --port 8502` / `.\start.bat --port 8502`。
+**启动端口被占用。** 新版启动器会自动处理：已有文迹就打开它，其他程序占用则更换端口。以启动窗口显示的地址为准。也可以用 `bash start.sh --port 8502` / `.\start.bat --port 8502` 指定优先端口。旧版出现 `Port 8501 is not available` 通常表示程序已经启动，与网络无关。
 
 **导出的图片中文变成方框。** macOS 通常已有苹方字体，Windows 通常已有微软雅黑。Linux 请安装 Noto Sans CJK 字体后重启工具；例如 Ubuntu/Debian 可运行 `sudo apt install fonts-noto-cjk`。工具不会自动下载字体。交互 HTML 则使用浏览器可用的字体。
 
